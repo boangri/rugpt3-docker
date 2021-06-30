@@ -14,8 +14,6 @@ path = "sberbank-ai/rugpt3large_based_on_gpt2"
 tok = GPT2Tokenizer.from_pretrained(path)
 model = GPT2LMHeadModel.from_pretrained(path) # .cuda()
 
-#prompt = "Сингапур стал первой страной, разрешившей"
-
 do_sample=True
 max_length=30
 repetition_penalty=5.0
@@ -25,19 +23,6 @@ temperature=1
 num_beams=10
 no_repeat_ngram_size=3
 
-#input_ids = tok.encode(prompt, return_tensors="pt")
-#out = model.generate(
-#      input_ids,
-#      max_length=max_length,
-#      repetition_penalty=repetition_penalty,
-#      do_sample=do_sample,
-#      top_k=top_k, top_p=top_p, temperature=temperature,
-#      num_beams=num_beams, no_repeat_ngram_size=no_repeat_ngram_size
-#      )
-#print(len(out[0]))
-#generated = list(map(tok.decode, out))
-#print(generated[0])
-
 
 app = Flask(__name__)
 
@@ -46,7 +31,7 @@ app = Flask(__name__)
 def index():
     return render_template("index.html") # темплейты берутся из каталога templates
 
-# здесь будут обрабатываться AJAX-запросы на распознавание цифры
+
 @app.route('/predict/', methods=['POST'])
 def predict():
     json_str = request.get_data()
